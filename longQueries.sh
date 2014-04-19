@@ -5,7 +5,7 @@
 
 h="localhost"
 p=3306
-u="admin"
+u=
 
 while test $# -gt 0
 do

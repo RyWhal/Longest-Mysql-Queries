@@ -22,17 +22,19 @@ do
             u=$2
             shift
             ;;       
-         *)
-            echo >&2 "Invalid argument: $1"
+         *) 
+            if [[ $1 == "--help" ]]
+	    then
+		echo "Usage: $0 -h HOSTNAME -p PORT -u USERNAME"
+		exit 1
+	    else
+                echo >&2 "Invalid argument: $1"
+	    fi
             ;;
     esac
     shift
 done
 
-[ $1 =="--help" ] && { echo "Usage: $0 -h HOSTNAME -p PORT -u USERNAME"; exit 1; }
-
-
 query="SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST Where Command NOT IN ('Sleep', 'Binlog Dump', 'Connect') AND ID <> CONNECTION_ID() ORDER BY Time LIMIT 5"
-
 
 mysql -p -h"$h"  -P"$p" -u"$u" -e "$query"

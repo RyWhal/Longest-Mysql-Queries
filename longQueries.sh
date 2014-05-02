@@ -35,6 +35,6 @@ do
     shift
 done
 
-query="SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST Where Command NOT IN ('Sleep', 'Binlog Dump', 'Connect') AND ID <> CONNECTION_ID() ORDER BY Time LIMIT 5"
+query="SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST Where Command NOT IN ('Sleep', 'Binlog Dump', 'Connect') AND ID <> CONNECTION_ID() ORDER BY Time DESC LIMIT 5"
 
 mysql -p -h"$h"  -P"$p" -u"$u" -e "$query"
